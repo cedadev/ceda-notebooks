@@ -1,0 +1,165 @@
+{
+	"cmip6-zarr-jasmin": {
+		"package_tags": [
+			"fsspec",
+			"pip",
+			"virtualenv",
+			"xarray",
+			"intake",
+			"intake_esm"
+		],
+		"dataset_tags": []
+	},
+	"baci-data-processor": {
+		"package_tags": [
+			"matplotlib",
+			"pip",
+			"virtualenv",
+			"sklearn",
+			"pandas",
+			"netCDF4",
+			"gdal,",
+			"seaborn",
+			"numpy"
+		],
+		"dataset_tags": [
+			"/neodc/baci_ssv/data/v1.0/regional_sites/13_europe/lst/lst_h18v04_2015_7day.nc",
+			"/neodc/baci_ssv/data/v1.0/regional_sites/13_europe/optical/rho_h18v04_2015_7day.nc",
+			"/neodc/baci_ssv/data/v1.0/regional_sites/13_europe/sar/sentinel-1_ascending_h18v04_2015_7day_vv.nc",
+			"/neodc/baci_ssv/data/v1.0/regional_sites/13_europe/sar/sentinel-1_descending_h18v04_2015_7day_vv.nc"
+		]
+	},
+	"plot-esacci-sst": {
+		"package_tags": [
+			"netCDF4",
+			"matplotlib",
+			"cartopy"
+		],
+		"dataset_tags": [
+			"/neodc/esacci/sst/data/lt/Analysis/L4/v01.1/1991/09/01/19910901120000-ESACCI-L4_GHRSST-SSTdepth-OSTIA-GLOB_LT-v02.0-fv01.1.nc"
+		]
+	},
+	"S5P_NO2_NRTI_plot": {
+		"package_tags": [
+			"matplotlib"
+		],
+		"dataset_tags": [
+			"/neodc/sentinel5p/data/L2_NO2/v1.3/2020/04/26/S5P_NRTI_L2__NO2____20200426T123448_20200426T123948_13139_01_010302_20200426T131747.nc",
+			"/neodc/sentinel5p/data/L2_NO2/v1.3/2020/01/01/S5P_OFFL_L2__NO2____20200101T110146_20200101T124316_11493_01_010302_20200103T041218.nc"
+		]
+	},
+	"pyam-example": {
+		"package_tags": [
+			"pyam",
+			"pip",
+			"virtualenv"
+		],
+		"dataset_tags": []
+	},
+	"cru-python-example": {
+		"package_tags": [
+			"netCDF4",
+			"matplotlib",
+			"numpy",
+			"cartopy"
+		],
+		"dataset_tags": [
+			"/badc/cru/data/cru_ts/cru_ts_4.02/data/pre/cru_ts4.02.1901.2017.pre.dat.nc"
+		]
+	},
+	"add_conda_envs": {
+		"package_tags": [],
+		"dataset_tags": []
+	},
+	"pygeode-virtualenv": {
+		"package_tags": [
+			"pip",
+			"virtualenv"
+		],
+		"dataset_tags": []
+	},
+	"read-and-plot-with-xarray": {
+		"package_tags": [
+			"matplotlib",
+			"xarray",
+			"pandas",
+			"numpy"
+		],
+		"dataset_tags": []
+	},
+	"rerunnable-virtualenv-maker": {
+		"package_tags": [
+			"pip",
+			"virtualenv"
+		],
+		"dataset_tags": []
+	},
+	"virtualenvs-on-jasmin": {
+		"package_tags": [
+			"fixnc",
+			"pip",
+			"virtualenv"
+		],
+		"dataset_tags": []
+	},
+	"notebook-tour-part-1": {
+		"package_tags": [],
+		"dataset_tags": []
+	},
+	"notebook-tour-part-2": {
+		"package_tags": [
+			"pandas",
+			"math"
+		],
+		"dataset_tags": []
+	},
+	"notebook-tour-part-3": {
+		"package_tags": [
+			"matplotlib"
+		],
+		"dataset_tags": []
+	},
+	"notebook-tour-part-4": {
+		"package_tags": [
+			"matplotlib",
+			"xarray",
+			"cartopy"
+		],
+		"dataset_tags": [
+			"/badc/cmip6/data/CMIP6/CMIP/NCAR/CESM2/abrupt-4xCO2/r1i1p1f1/Amon/"
+		]
+	},
+	"notebook-tour-part-5": {
+		"package_tags": [
+			"pandas"
+		],
+		"dataset_tags": []
+	},
+	"notebook-tour-part-6": {
+		"package_tags": [
+			"fixnc",
+			"pip",
+			"virtualenv"
+		],
+		"dataset_tags": []
+	},
+	"notebook-tour-part-7": {
+		"package_tags": [],
+		"dataset_tags": []
+	},
+	"notebook-tour": {
+		"package_tags": [
+			"matplotlib",
+			"math",
+			"virtualenv",
+			"pip",
+			"xarray",
+			"pandas",
+			"fixnc",
+			"cartopy"
+		],
+		"dataset_tags": [
+			"/badc/cmip6/data/CMIP6/CMIP/NCAR/CESM2/abrupt-4xCO2/r1i1p1f1/Amon/"
+		]
+	}
+}
