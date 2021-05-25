@@ -2,6 +2,7 @@ import simplejson as json
 import nbformat
 import os
 import re
+import requests
 
 
 def get_standard_lib():
@@ -20,6 +21,14 @@ def lib_filter(item):
     return True
 
 
+def get_dataset_id(fpath):
+    request_url = 'https://catalogue.ceda.ac.uk/api/v0/obs/get_info' + fpath
+    resp = requests.get(request_url)
+    id_url = resp.json()['url']
+    title = resp.json()['title']
+    return {'dataset_id': os.path.basename(id_url), 'title': title}
+
+
 def generate_json(fpath):
     dataset_dirs = ['/neodc/', '/badc/']
     packages = []
@@ -32,6 +41,7 @@ def generate_json(fpath):
         if cell['cell_type'] == 'code':
             content = cell['source']
             if 'import' in content:
+                # doesn't deal with from x import y yet
                 imports = re.findall(r'^import.*(?:$|\n)', content, re.MULTILINE)
                 found_packages = [imp.split(' ')[1].strip('\n').split('.')[0] for imp in imports]
                 packages += [p for p in found_packages if p not in standard_lib and f'{p}.py' not in standard_lib]
@@ -39,13 +49,15 @@ def generate_json(fpath):
             for d in dataset_dirs:
                 if d in content:
                     fpaths = re.findall(fr"'{d}.*'", content)
-                    datasets += [f.strip("'") for f in fpaths]
+                    new_datasets = [f.strip("'") for f in fpaths]
+                    datasets += [get_dataset_id(ds) for ds in new_datasets]
+
     
     # remove duplicates
     packages = list(set(packages))
-    datasets = list(set(datasets))
+    datasets = [i for n, i in enumerate(datasets) if i not in datasets[n + 1:]]
     
-    return (filename, {'package_tags': packages, 'dataset_tags': datasets})
+    return (filename, {'package_tags': packages, 'datasets': datasets})
 
 
 def main():
