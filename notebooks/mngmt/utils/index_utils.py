@@ -1,9 +1,9 @@
 import pandas as pd
 import re
 from tabulate import tabulate
-import ipywidgets as widgets
 
-def search_index(search_term, index_dict): #Is not working for dataset content currently
+
+def search_index(search_term, index_dict):
     filtered_dict = {}
     for k in index_dict:
         found = False
