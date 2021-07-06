@@ -1,9 +1,10 @@
 import pandas as pd
 import re
 from tabulate import tabulate
+import textwrap
+from IPython.core.display import display, HTML
 
-
-def search_index(search_term, index_dict):
+def search_index(search_term, index_dict, display_format='text'):
     filtered_dict = {}
     for k in index_dict:
         found = False
@@ -32,25 +33,29 @@ def search_index(search_term, index_dict):
             
             if found: break
                    
-    print_index(filtered_dict)
+    print_index(filtered_dict, display_format)
 
 
-def print_index(index_dict):
-    df_dict = {'File': [], 'Packages': [], 'Dataset ID': [], 'Dataset Title': []}
+def print_index(index_dict, display_format='text'):
+    df_dict = {'File': [], 'Packages': [], 'Dataset': []}
     for k in index_dict:
         df_dict['File'].append(k)
         df_dict['Packages'].append('\n'.join(index_dict[k]['package_tags']))
-        dset_ids = []
-        dset_titles = []
+        datasets = []
         for dset in index_dict[k]['datasets']:
-            dset_ids.append(dset['dataset_id'])
-            dset_titles.append(dset['title'])
+            datasets.append((dset['title'], dset['dataset_id']))
         
-        dset_titles = '\n'.join([re.sub('(.{32})', '\\1\n', t, 0, re.DOTALL) for t in dset_titles])
+        if display_format == 'text':
+            datasets = '\n'.join([f'{textwrap.fill(t, width=60)}\nhttps://catalogue.ceda.ac.uk/{i}' for (t, i) in datasets])
+        elif display_format == 'html':
+            datasets = '\n'.join([f'<a href="https://catalogue.ceda.ac.uk/{i}" title="Catalogue record">{textwrap.fill(t, width=120)}</a>' for (t, i) in datasets])
         
-        df_dict['Dataset ID'].append('\n'.join(dset_ids))
-        df_dict['Dataset Title'].append(dset_titles)
+        df_dict['Dataset'].append(datasets)
         
+    df = pd.DataFrame(data=df_dict)
     
-    print(tabulate(pd.DataFrame(data=df_dict), headers='keys', tablefmt='fancy_grid'))
+    if display_format == 'text':
+        print(tabulate(df, headers='keys', tablefmt='fancy_grid'))
+    elif display_format == 'html':
+        display(HTML(df.to_html(escape=False).replace("\\n","<br>")))
     
