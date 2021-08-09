@@ -41,8 +41,8 @@ def generate_json(fpath):
         if cell['cell_type'] == 'code':
             content = cell['source']
             if 'import' in content:
-                # doesn't deal with from x import y yet
-                imports = re.findall(r'^import.*(?:$|\n)', content, re.MULTILINE)
+                imports = re.findall(r'^(from|import).*(?:$|\n)', content, re.MULTILINE)
+                #from_imports = re.findall(r'^from.*import.*(?:$|\n)', content, re.MULTILINE)
                 found_packages = [imp.split(' ')[1].strip('\n').split('.')[0] for imp in imports]
                 packages += [p for p in found_packages if p not in standard_lib and f'{p}.py' not in standard_lib]
 

@@ -31,6 +31,8 @@ import virtualenv
 import pip
 import os
 import shutil
+import importlib
+import re
 
 # Define and create the base directory install virtual environments
 venvs_dir = os.path.join(os.path.expanduser("~"), "nb-venvs")
@@ -98,7 +100,7 @@ def install_packages(packages, venv_name=None, venv_dir="auto", venvs_dir=venvs_
     print("Installation complete!")
     
 
-def setup_venv(venv_name, packages=None, venvs_dir=venvs_dir, force_recreate=False):
+def setup_venv(venv_name, packages=None, venvs_dir=venvs_dir, force_recreate=False, force_install=False):
     """
     Create, and activate a virtualenv using the name `venv_name` under the directory `venvs_dir`.
     Then install `packages` if any provided.
@@ -107,4 +109,12 @@ def setup_venv(venv_name, packages=None, venvs_dir=venvs_dir, force_recreate=Fal
     """
     create_venv(venv_name, venvs_dir, force_recreate)
     activate_venv(venv_name)
-    install_packages(packages, venv_name)
+    if force_install:
+        install_packages(packages, venv_name)
+    elif packages:
+        try:
+            importlib.__import__(re.split("[=<>\[]", packages[-1])[0])
+        except ModuleNotFoundError:
+            install_packages(packages, venv_name)
+    else:
+        print("No packages specified for installation")
