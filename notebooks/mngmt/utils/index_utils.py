@@ -52,10 +52,11 @@ def print_index(index_dict, display_format='text'):
         
         df_dict['Dataset'].append(datasets)
         
+    pd.set_option('display.max_colwidth', -1)
     df = pd.DataFrame(data=df_dict)
     
     if display_format == 'text':
         print(tabulate(df, headers='keys', tablefmt='fancy_grid'))
     elif display_format == 'html':
-        display(HTML(df.to_html(escape=False).replace("\\n","<br>")))
+        display(HTML(df.to_html(escape=False, index=False).replace("\\n","<br>")))
     
