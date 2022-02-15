@@ -76,7 +76,7 @@ def activate_venv(venv_name: str, venvs_dir: str = user_dir):
     venv = os.path.join(venvs_dir, venv_name)
     sp_dir = "lib/python{}.{}/site-packages".format(sys.version_info.major, sys.version_info.minor)
 
-    if not os.path.isdir(f"{venv}/{sp_dir}"):
+    if not os.path.isdir(os.path.join(venv, sp_dir)):
         raise Exception(f"No venv found at {venv}, please create venv first.")
 
     sys.path.append(f"{venv}/lib/python3.8/site-packages/")
