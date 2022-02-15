@@ -80,7 +80,7 @@ def activate_venv(venv_name: str, venvs_dir: str = user_dir):
     sys.path.append(f"{venv}/lib/python3.8/site-packages/")
 
 
-def install_packages(packages: list, venv_name: str, venvs_dir: str = user_dir):
+def install_packages(packages: list, venv_name: str, venvs_dir: str = user_dir, force_install=False):
     """
     Install packages into the a virtualenv.
     If `venv_dir` is "auto" then it tries to work out where the venv is located.
@@ -88,15 +88,16 @@ def install_packages(packages: list, venv_name: str, venvs_dir: str = user_dir):
     """
     # Install a set of required packages via `pip`
     for pkg in packages:
-        print(f"Installing package: {pkg}")
         install_package(pkg, venv_name, venvs_dir)
 
-    print("Installation complete!")
 
-
-def install_package(package: str, venv_name: str, venvs_dir: str = user_dir):
+def install_package(package: str, venv_name: str, venvs_dir: str = user_dir, force_install=False):
     venv = os.path.join(venvs_dir, venv_name)
-    pip.main(["install", "--prefix", venv, package])
+    if package in sys.modules and not force_install:
+        print(f"{package} already installed in sys.modules")
+    else:
+        print(f"Installing package: {package}")
+        pip.main(["install", "--prefix", venv, package])
 
 
 def setup_venv(venv_name: str, packages: list, venvs_dir: str = user_dir, force_recreate=False, force_install=False):
@@ -108,10 +109,4 @@ def setup_venv(venv_name: str, packages: list, venvs_dir: str = user_dir, force_
     """
     create_venv(venv_name, venvs_dir, force_recreate)
     activate_venv(venv_name, venvs_dir)
-    if force_install:
-        install_packages(packages, venv_name, venvs_dir)
-    elif packages:
-        try:
-            importlib.__import__(re.split("[=<>\[]", packages[-1])[0])
-        except ModuleNotFoundError:
-            install_packages(packages, venv_name, venvs_dir)
+    install_packages(packages, venv_name, venvs_dir, force_install)
