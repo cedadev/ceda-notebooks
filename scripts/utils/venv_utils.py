@@ -51,6 +51,7 @@ def create_venv(venv_name: str, venvs_dir: str = user_dir, force_recreate=False)
 
     # Define the venv directory
     venv = os.path.join(venvs_dir, venv_name)
+    sp_dir = "lib/python{}.{}/site-packages".format(sys.version_info.major, sys.version_info.minor)
 
     # Do we need to remove the old venv
     if os.path.isdir(venv) and force_recreate:
@@ -58,7 +59,7 @@ def create_venv(venv_name: str, venvs_dir: str = user_dir, force_recreate=False)
         shutil.rmtree(venv)
 
     # Create the virtual environment
-    if not os.path.isdir(os.path.join(venv, 'lib/python3.8/site-packages')):
+    if not os.path.isdir(os.path.join(venv, sp_dir)):
         print(f"Making venv {venv_name} directory in {venvs_dir}")
         os.system(f"python -m venv {venv}")
     else:
@@ -73,8 +74,9 @@ def activate_venv(venv_name: str, venvs_dir: str = user_dir):
     """
     print(f"Activating virtualenv: {venv_name}")
     venv = os.path.join(venvs_dir, venv_name)
+    sp_dir = "lib/python{}.{}/site-packages".format(sys.version_info.major, sys.version_info.minor)
 
-    if not os.path.isdir(f"{venv}/lib/python3.8/site-packages/"):
+    if not os.path.isdir(f"{venv}/{sp_dir}"):
         raise Exception(f"No venv found at {venv}, please create venv first.")
 
     sys.path.append(f"{venv}/lib/python3.8/site-packages/")
