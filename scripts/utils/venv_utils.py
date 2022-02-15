@@ -27,7 +27,6 @@ sys.path.insert(0, "<location_on_disk>/ceda-notebooks>")
 """
 
 # Import the required packages
-import virtualenv
 import pip
 import os
 import shutil
@@ -59,9 +58,11 @@ def create_venv(venv_name: str, venvs_dir: str = user_dir, force_recreate=False)
         shutil.rmtree(venv)
 
     # Create the virtual environment
-    if not os.path.isdir(venv):
+    if not os.path.isdir(os.path.join(venv, 'lib/python3.8/site-packages')):
         print(f"Making venv {venv_name} directory in {venvs_dir}")
         os.system(f"python -m venv {venv}")
+    else:
+        print(f"Venv already exists: {venv}\nforce_recreate must be True to recreate a venv")
 
 
 def activate_venv(venv_name: str, venvs_dir: str = user_dir):
@@ -85,15 +86,17 @@ def install_packages(packages: list, venv_name: str, venvs_dir: str = user_dir):
     If `venv_dir` is "auto" then it tries to work out where the venv is located.
     Returns None, raises exception if cannot activate.
     """
-    activate_venv(venvs_dir=venvs_dir, venv_name=venv_name)
-    venv = os.path.join(venvs_dir, venv_name)
-
     # Install a set of required packages via `pip`
     for pkg in packages:
         print(f"Installing package: {pkg}")
-        pip.main(["install", "--prefix", venv, pkg])
+        install_package(pkg, venv_name, venvs_dir)
 
     print("Installation complete!")
+
+
+def install_package(package: str, venv_name: str, venvs_dir: str = user_dir):
+    venv = os.path.join(venvs_dir, venv_name)
+    pip.main(["install", "--prefix", venv, package])
 
 
 def setup_venv(venv_name: str, packages: list, venvs_dir: str = user_dir, force_recreate=False, force_install=False):
@@ -106,9 +109,9 @@ def setup_venv(venv_name: str, packages: list, venvs_dir: str = user_dir, force_
     create_venv(venv_name, venvs_dir, force_recreate)
     activate_venv(venv_name, venvs_dir)
     if force_install:
-        install_packages(packages, venv_name)
+        install_packages(packages, venv_name, venvs_dir)
     elif packages:
         try:
             importlib.__import__(re.split("[=<>\[]", packages[-1])[0])
         except ModuleNotFoundError:
-            install_packages(packages, venv_name)
+            install_packages(packages, venv_name, venvs_dir)
