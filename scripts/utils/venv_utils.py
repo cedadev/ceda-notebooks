@@ -43,17 +43,21 @@ def create_venv(venv_name: str, venvs_dir: str = user_dir, force_recreate=False)
     """
     Create a virtualenv using the name `venv_name` under the directory `venvs_dir`.
     If `force_recreate` is True, then remove old venv and create a new one.
-    Returns None, raises exception if cannot create VM.
+
+    @param venv_name: name of the venv
+    @param venvs_dir: filepath to the venv. Default /$HOME/nb-venvs/
+    @param force_recreate: flag whether to delete and recreate venv. Default False.
+
     """
     if not os.path.isdir(venvs_dir):
         print(f"Making venvs dir: {venvs_dir}")
         os.makedirs(venvs_dir)
 
-    # Define the venv directory
+    # Define the venv absolute path
     venv = os.path.join(venvs_dir, venv_name)
     sp_dir = "lib/python{}.{}/site-packages".format(sys.version_info.major, sys.version_info.minor)
 
-    # Do we need to remove the old venv
+    # Remove the old venv if flagged
     if os.path.isdir(venv) and force_recreate:
         print(f"Removing old venv: {venv}")
         shutil.rmtree(venv)
@@ -69,8 +73,7 @@ def create_venv(venv_name: str, venvs_dir: str = user_dir, force_recreate=False)
 def activate_venv(venv_name: str, venvs_dir: str = user_dir):
     """
     Activate an existing virtualenv using the name `venv_name` under the directory `venvs_dir`.
-    If `venv_dir` is "auto" then it tries to work out where the venv is located.
-    Returns None, raises exception if cannot activate.
+    Adds the venv site-packages to the system paths.
     """
     print(f"Activating virtualenv: {venv_name}")
     venv = os.path.join(venvs_dir, venv_name)
@@ -87,15 +90,27 @@ def install_packages(packages: list, venv_name: str, venvs_dir: str = user_dir, 
     Install packages into the a virtualenv.
     If `venv_dir` is "auto" then it tries to work out where the venv is located.
     Returns None, raises exception if cannot activate.
+
+    @param packages: list of packages to pip install to the venv
+    @param venv_name: name of the venv to install packages
+    @param venvs_dir: location of the venv. Default $HOME/nb-venvs/
+    @param force_install: flag to whether check for install or just install anyways. Default False.
     """
     # Install a set of required packages via `pip`
     for pkg in packages:
-        install_package(pkg, venv_name, venvs_dir)
+        install_package(pkg, venv_name, venvs_dir, force_install)
 
 
 def install_package(package: str, venv_name: str, venvs_dir: str = user_dir, force_install=False):
+    """
+
+    @param package: name of single package to install to the venv
+    @param venv_name: name of the venv to install packages
+    @param venvs_dir: location of the venv. Default $HOME/nb-venvs/
+    @param force_install: flag to whether check for install or just install anyways. Default False.
+    """
     venv = os.path.join(venvs_dir, venv_name)
-    if package in sys.modules and not force_install:
+    if package in sys.modules.keys() and not force_install:
         print(f"{package} already installed in sys.modules")
     else:
         print(f"Installing package: {package}")
@@ -104,10 +119,10 @@ def install_package(package: str, venv_name: str, venvs_dir: str = user_dir, for
 
 def setup_venv(venv_name: str, packages: list, venvs_dir: str = user_dir, force_recreate=False, force_install=False):
     """
+    All in one process to setup and venv and install packages.
     Create, and activate a virtualenv using the name `venv_name` under the directory `venvs_dir`.
     Then install `packages` if any provided.
     If `force_recreate` is True, then remove old venv and create a new one.
-    Returns None, raises exception if cannot create VM.
     """
     create_venv(venv_name, venvs_dir, force_recreate)
     activate_venv(venv_name, venvs_dir)
