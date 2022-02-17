@@ -27,7 +27,7 @@ jobs:
       - name: Install dependencies
         run: |
           apt update && apt install sudo
-          sudo apt-get -y install libproj-dev libgeos-dev
+          sudo apt-get -y install proj-bin geos
           python -m pip install --upgrade pip
           pip install -r requirements.txt && pip install pytest nbmake
 
