@@ -15,14 +15,14 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: mahir-sparkess/mini-ceda-archive
-          path: /mini-ceda-archive
+          path: mini-ceda-archive
           ref: ceda-notebooks
 
       - name: Create symlinks
         run: |
-          ln -s /mini-ceda-archive/archive/neodc /neodc
-          ln -s /mini-ceda-archive/archive/badc /badc
-          ln -s /mini-ceda-archive/archive/gws /gws
+          ln -s mini-ceda-archive/archive/neodc /neodc
+          ln -s mini-ceda-archive/archive/badc /badc
+          ln -s mini-ceda-archive/archive/gws /gws
 
       - name: Install requirements
         run: |
