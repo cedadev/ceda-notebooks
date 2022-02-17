@@ -9,7 +9,7 @@ jobs:
 
     steps:
       - name: Install mini-archive
-        uses: actions/checkout@ceda-notebooks
+        uses: actions/checkout@issue/29/github-actions
         with:
           repository: mahir-sparkess/mini-ceda-archive
           path: mini-ceda-archive
