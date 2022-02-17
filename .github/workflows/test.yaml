@@ -24,8 +24,9 @@ jobs:
           ln -s mini-ceda-archive/archive/badc /badc
           ln -s mini-ceda-archive/archive/gws /gws
 
-      - name: Install requirements
+      - name: Install dependencies
         run: |
+          sudo apt -y install libproj-dev libpgeos-dev
           python -m pip install --upgrade pip
           pip install -r requirements.txt && pip install pytest nbmake
 
