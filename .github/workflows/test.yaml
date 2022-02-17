@@ -1,0 +1,30 @@
+name: test-notebooks
+on:
+  [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container: python:3.8
+
+    steps:
+      - name: Install mini-archive
+        uses: actions/checkout@ceda-notebooks
+        with:
+          repository: mahir-sparkess/mini-ceda-archive
+          path: mini-ceda-archive
+          ref: ceda-notebooks
+
+      - name: Create symlinks
+        run: |
+          ln -s mini-ceda-archive/archive/neodc /neodc
+          ln -s mini-ceda-archive/archive/badc /badc
+          ln -s mini-ceda-archive/archive/gws /gws
+
+      - name: Install requirements
+        run: |
+          pip install -r ./requirements.txt && pip install pytest nbmake
+
+      - name: Run test suite
+        run: |
+          pytest --nbmake notebooks/
