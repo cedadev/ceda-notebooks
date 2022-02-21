@@ -8,6 +8,16 @@ jobs:
     container: python:3.8
 
     steps:
+      - uses: actions/checkout@v2
+      - name: Setup conda
+        uses: s-weigand/setup-conda@v2
+        with:
+          update-conda: true
+          python-version: 3.8
+          conda-channels: anaconda, conda-forge
+      - run: conda --version
+      - run: which python
+
       - name: Checkout
         uses: actions/checkout@v2
 
@@ -29,6 +39,7 @@ jobs:
           conda env create -f environment.yaml
           conda activate nb-pkgs
           conda env list
+
       - name: Run test suite
         run: |
           pytest --nbmake notebooks/
