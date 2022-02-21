@@ -19,7 +19,7 @@ jobs:
       - run: which python
 
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v1
 
       - name: Install mini-archive
         uses: actions/checkout@v2
