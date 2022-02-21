@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Setup conda
-        uses: s-weigand/setup-conda@v2
+        uses: s-weigand/setup-conda@v1
         with:
           update-conda: true
           python-version: 3.8
@@ -19,7 +19,7 @@ jobs:
       - run: which python
 
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
 
       - name: Install mini-archive
         uses: actions/checkout@v2
