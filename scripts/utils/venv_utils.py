@@ -8,7 +8,7 @@ JASMIN Notebook Service.
 Simplest usage is as follows:
 
 ```
-from notebooks.mngmt.utils.venv_utils import *
+from scripts.utils import venv_utils
 
 venv_name = "my_venv"
 packages = ["fixnc", "scipy"]
@@ -30,8 +30,6 @@ sys.path.insert(0, "<location_on_disk>/ceda-notebooks>")
 import pip
 import os
 import shutil
-import importlib
-import re
 import sys
 
 
