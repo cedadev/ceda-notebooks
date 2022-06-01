@@ -1,0 +1,179 @@
+{
+	"cmip6-zarr-jasmin": {
+		"package_tags": [
+			"pip",
+			"intake",
+			"virtualenv",
+			"intake_esm",
+			"fsspec",
+			"xarray"
+		],
+		"datasets": []
+	},
+	"baci-data-processor": {
+		"package_tags": [
+			"numpy",
+			"pip",
+			"pandas",
+			"virtualenv",
+			"sklearn",
+			"netCDF4",
+			"gdal,",
+			"matplotlib",
+			"seaborn"
+		],
+		"datasets": [
+			{
+				"dataset_id": "af13038e9caf499482a9bbb0b8fca2b8",
+				"title": "BACI: System State Vector (SSV)  land surface time series dataset for the European regional site, 2000-2015,  v1.0"
+			}
+		]
+	},
+	"plot-esacci-sst": {
+		"package_tags": [
+			"matplotlib",
+			"netCDF4",
+			"cartopy"
+		],
+		"datasets": [
+			{
+				"dataset_id": "c65ce27928f34ebd92224c451c2a8bed",
+				"title": "ESA Sea Surface Temperature Climate Change Initiative (ESA SST CCI): Analysis long term product version 1.1"
+			}
+		]
+	},
+	"S5P_NO2_NRTI_plot": {
+		"package_tags": [
+			"matplotlib"
+		],
+		"datasets": [
+			{
+				"dataset_id": "e34eaffcf6bb4f3c87fffe0814f5c9bf",
+				"title": "Sentinel 5P: Nitrogen Dioxide (NO2) Total Column level 2 data"
+			}
+		]
+	},
+	"pyam-example": {
+		"package_tags": [
+			"virtualenv",
+			"pip",
+			"pyam"
+		],
+		"datasets": []
+	},
+	"cru-python-example": {
+		"package_tags": [
+			"numpy",
+			"netCDF4",
+			"matplotlib",
+			"cartopy"
+		],
+		"datasets": [
+			{
+				"dataset_id": "b2f81914257c4188b181a4d8b0a46bff",
+				"title": "CRU TS4.02: Climatic Research Unit (CRU) Time-Series (TS) version 4.02 of high-resolution gridded data of month-by-month variation in climate (Jan. 1901- Dec. 2017)"
+			}
+		]
+	},
+	"add_conda_envs": {
+		"package_tags": [],
+		"datasets": []
+	},
+	"pygeode-virtualenv": {
+		"package_tags": [
+			"virtualenv",
+			"pip"
+		],
+		"datasets": []
+	},
+	"read-and-plot-with-xarray": {
+		"package_tags": [
+			"numpy",
+			"matplotlib",
+			"pandas",
+			"xarray"
+		],
+		"datasets": []
+	},
+	"rerunnable-virtualenv-maker": {
+		"package_tags": [
+			"virtualenv",
+			"pip"
+		],
+		"datasets": []
+	},
+	"virtualenvs-on-jasmin": {
+		"package_tags": [
+			"virtualenv",
+			"pip",
+			"fixnc"
+		],
+		"datasets": []
+	},
+	"notebook-tour-part-1": {
+		"package_tags": [],
+		"datasets": []
+	},
+	"notebook-tour-part-2": {
+		"package_tags": [
+			"math",
+			"pandas"
+		],
+		"datasets": []
+	},
+	"notebook-tour-part-3": {
+		"package_tags": [
+			"matplotlib"
+		],
+		"datasets": []
+	},
+	"notebook-tour-part-4": {
+		"package_tags": [
+			"matplotlib",
+			"xarray",
+			"cartopy"
+		],
+		"datasets": [
+			{
+				"dataset_id": "dd32b23f7e29424c8bc84f1f7b7678c3",
+				"title": "WCRP CMIP6: National Center for Atmospheric Research (NCAR) CESM2 model output for the \"abrupt-4xCO2\" experiment"
+			}
+		]
+	},
+	"notebook-tour-part-5": {
+		"package_tags": [
+			"pandas"
+		],
+		"datasets": []
+	},
+	"notebook-tour-part-6": {
+		"package_tags": [
+			"virtualenv",
+			"pip",
+			"fixnc"
+		],
+		"datasets": []
+	},
+	"notebook-tour-part-7": {
+		"package_tags": [],
+		"datasets": []
+	},
+	"notebook-tour": {
+		"package_tags": [
+			"pip",
+			"fixnc",
+			"pandas",
+			"virtualenv",
+			"math",
+			"matplotlib",
+			"xarray",
+			"cartopy"
+		],
+		"datasets": [
+			{
+				"dataset_id": "dd32b23f7e29424c8bc84f1f7b7678c3",
+				"title": "WCRP CMIP6: National Center for Atmospheric Research (NCAR) CESM2 model output for the \"abrupt-4xCO2\" experiment"
+			}
+		]
+	}
+}

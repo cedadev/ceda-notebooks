@@ -1,0 +1,6 @@
+ipywidgets
+simplejson
+jupyter
+notebook
+pandas
+tabulate
