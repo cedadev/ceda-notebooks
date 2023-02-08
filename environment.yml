@@ -1,0 +1,21 @@
+name: nb-pkgs
+dependencies:
+  - python=3.8
+  - numpy=1.22.2
+  - pandas=1.4.1
+  - matplotlib=3.5.1
+  - xarray=0.21.1
+  - netCDF4=1.5.8
+  - GDAL=3.4.1
+  - seaborn=0.11.2
+  - scipy=1.8.0
+  - scikit-learn=1.0.2
+  - Cython=0.29.28
+  - Cartopy=0.18.0
+  - ipywidgets
+  - simplejson
+  - jupyter
+  - notebook
+  - tabulate
+  - pytest
+  - nbmake

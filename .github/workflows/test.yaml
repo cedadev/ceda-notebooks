@@ -1,0 +1,45 @@
+name: test-notebooks
+on:
+  [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container: python:3.8
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup conda
+        uses: s-weigand/setup-conda@v1
+        with:
+          update-conda: true
+          python-version: 3.8
+          conda-channels: anaconda, conda-forge
+      - run: conda --version
+      - run: which python
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install mini-archive
+        uses: actions/checkout@v2
+        with:
+          repository: mahir-sparkess/mini-ceda-archive
+          path: mini-ceda-archive
+          ref: ceda-notebooks
+
+      - name: Create symlinks
+        run: |
+          ln -s mini-ceda-archive/archive/neodc /neodc
+          ln -s mini-ceda-archive/archive/badc /badc
+          ln -s mini-ceda-archive/archive/gws /gws
+
+      - name: Install dependencies
+        run: |
+          conda env create -f environment.yaml
+          conda activate nb-pkgs
+          conda env list
+
+      - name: Run test suite
+        run: |
+          pytest --nbmake notebooks/
